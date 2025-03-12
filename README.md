@@ -24,12 +24,12 @@ One of the main things holding back deep learning in genomics and proteomics is 
 BugBuster takes inspiration from the ESM-2 publication, where they use a protein language model trained with an MLM objective as a fine-tuning base combined with a structure prediction trunk to achieve SOTA results (Figure 1, top). BugBuster mimics this by using the same pretrained ESM model but with the addition of antibiotic resistance protein prediction layers (Figure 1, bottom). The modularity of this approach is utilized in BugBuster's design, as it would not require many code adjustments to train BugBuster on an entirely different task, including regression tasks.
 
 <p align="center">
-  <img src="./Figures/ESM Schematic.jpg" alt="ESM schematic" width="300px" />
-  <br>
-  <img src="./Figures/BugBuster Schematic.jpg" alt="BugBuster Schematic" width="300px" />
+  <img src="./Figures/ESM Schematic.jpg" alt="ESM schematic" width="300px" style="display: inline; margin-bottom:-6px" />
+  <img src="./Figures/BugBuster Schematic.jpg" alt="BugBuster Schematic" width="300px" style="display: inline;" />
 </p>
 
 <i align="center">Figure 1 - <b>Top: </b>Example schematic from ESM publication showing the use of the model for a structure prediction task. <b>Bottom: </b>ESM schematic adapted to show how BugBuster adapts a similar approach, replacing structure prediction layers with ARG prediction layers.</i>
+<br><br>
 
 To experiment further, three methods of transfer learning were tested through the BugBuster pipeline:
 
@@ -40,22 +40,28 @@ To experiment further, three methods of transfer learning were tested through th
 ### Results
 Overall, the BugBuster model performs very impressively with all three weight freezing methods. The best performing model was trained with unfrozen ESM weights and reaches an overall accuracy of 95% across both classes, which surpasses the best published accuracy values by 7% (Figure 2). The best performing model previously published is trained from scratch on the ARSS-90 dataset.
 
-<div style="display: flex; justify-content: center; align-items: center;">
-    <img src="./Figures/Performance Comparison.jpg" alt="Performance Comparison" style="margin-top: 10px">
-</div>
-<i style="text-align: center; display: block; width: 100%; max-width: 600px; margin: 0 auto;">
-    Figure 1 - <b>A: </b>Performance of fully trained BugBuster with unfrozen ESM weights throughout training. 
-    <b>B: </b>Performance of other popular approaches for protein classification used on ARSS-90 dataset, 
-    taken from <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11241484/#_ad93_" target="_blank">Dong et al. 2024</a>.
-</i>
+<p align="center">
+  <img src="./Figures/Performance Comparison.jpg" alt="Performance Comparison" width="500px" />
+</p>
+
+<p align="center">
+  <i>Figure 1 - <b>A: </b>Performance of fully trained BugBuster with unfrozen ESM weights throughout training. <b>B: </b>Performance of other popular approaches for protein classification used on ARSS-90 dataset, taken from <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11241484/#_ad93_">Dong et al. 2024</a>.</i>
+</p>
 <br>
 Also implemented through BugBuster are two attention visualization techniques: attention weight maps, motif plots. Examples of these two types of figures can be seen in Figure 3. These plots are especially useful as they offer very simple ways to visualize the decision making of the model. These methods, however, are not perfect and their usefulness can depend on model architecture and training objective.
 
-<div style="display: flex; flex-direction: column; align-items: center; margin: 20px 0;">
-    <img src="./Figures/Example Attention Maps.jpg" alt="Attention Matrices" style="height: 150px;">
-    <img src="./Figures/Example Motif Plots.jpg" alt="Motif Plots" style="height: 200px; margin-bottom: 10px;">
-    <i style="text-align: center; width: 100%; max-width: 600px; margin: 0 auto;">Figure 3 - <b>Top: </b>Example attention matrix plots generated from bacterial ribonuclease sequence, correctly predicted as not antibiotic resistant. <b>Bottom: </b>Example motif plots generated from two multidrug resistant proteins, correctly identified by BugBuster.</i>
-</div>
+<br>
+<p align="center">
+  <img src="./Figures/Example Attention Maps.jpg" alt="Attention Matrices"/>
+</p>
+
+<p align="center" style="margin-top: -22px;">
+  <img src="./Figures/Example Motif Plots.jpg" alt="Motif Plots"/>
+</p>
+
+<p align="center">
+  <i>Figure 3 - <b>Top: </b>Example attention matrix plots generated from bacterial ribonuclease sequence, correctly predicted as not antibiotic resistant. <b>Bottom: </b>Example motif plots generated from two multidrug resistant proteins, correctly identified by BugBuster.</i>
+</p>
 
 ### Discussion
 If BugBuster shows anything, its that ESM can be used to create robust transfer learning pipelines, further adding to the impressive resume of the BERT and ESM architectures. Unfortunately, Figure 3's attention matrices and motif plots appear to be quite noisy as it relates to ARG classification. This is most likely due to the varrying training objectives and overall task complexity. The attention matrix in the very top-left was collected from only ESM layers, which is why there is little noise. 
