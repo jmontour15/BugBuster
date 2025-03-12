@@ -28,7 +28,7 @@ BugBuster takes inspiration from the ESM-2 publication, where they use a protein
   <img src="./Figures/BugBuster Schematic.jpg" alt="BugBuster Schematic" width="300px" style="display: inline;" />
 </p>
 
-<i align="center">Figure 1 - <b>Top: </b>Example schematic from ESM publication showing the use of the model for a structure prediction task. <b>Bottom: </b>ESM schematic adapted to show how BugBuster adapts a similar approach, replacing structure prediction layers with ARG prediction layers.</i>
+<i align="center">Figure 1 - <b>Left: </b>Example schematic from ESM publication showing the use of the model for a structure prediction task. <b>Right: </b>ESM schematic adapted to show how BugBuster adapts a similar approach, replacing structure prediction layers with ARG prediction layers.</i>
 <br><br>
 
 To experiment further, three methods of transfer learning were tested through the BugBuster pipeline:
@@ -50,6 +50,7 @@ Overall, the BugBuster model performs very impressively with all three weight fr
 <br>
 Also implemented through BugBuster are two attention visualization techniques: attention weight maps, motif plots. Examples of these two types of figures can be seen in Figure 3. These plots are especially useful as they offer very simple ways to visualize the decision making of the model. These methods, however, are not perfect and their usefulness can depend on model architecture and training objective.
 
+<br>
 <br>
 <p align="center">
   <img src="./Figures/Example Attention Maps.jpg" alt="Attention Matrices"/>
