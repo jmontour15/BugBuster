@@ -23,11 +23,14 @@ One of the main things holding back deep learning in genomics and proteomics is 
 
 BugBuster takes inspiration from the ESM-2 publication, where they use a protein language model trained with an MLM objective as a fine-tuning base combined with a structure prediction trunk to achieve SOTA results (Figure 1, top). BugBuster mimics this by using the same pretrained ESM model but with the addition of antibiotic resistance protein prediction layers (Figure 1, bottom). The modularity of this approach is utilized in BugBuster's design, as it would not require many code adjustments to train BugBuster on an entirely different task, including regression tasks.
 
-<div style="display: flex; flex-direction: column; align-items: center; margin: 20px 0;">
-    <img src="./Figures/ESM Schematic.jpg" alt="ESM schematic" style="height: 300px;">
-    <img src="./Figures/BugBuster Schematic.jpg" alt="BugBuster Schematic" style="height: 300px; margin-bottom: 10px;">
-    <i style="text-align: center; width: 100%; max-width: 600px; margin: 0 auto;">Figure 1 - <b>Top: </b>Example schematic from ESM publication showing the use of the model for a structure prediction task. <b>Bottom: </b>ESM schematic adapted to show how BugBuster adapts a similar approach, replacing structure prediction layers with ARG prediction layers.</i>
-</div>
+<p align="center">
+  <img src="./Figures/ESM Schematic.jpg" alt="ESM schematic" width="300px" />
+  <br>
+  <img src="./Figures/BugBuster Schematic.jpg" alt="BugBuster Schematic" width="300px" />
+</p>
+
+<i align="center">Figure 1 - <b>Top: </b>Example schematic from ESM publication showing the use of the model for a structure prediction task. <b>Bottom: </b>ESM schematic adapted to show how BugBuster adapts a similar approach, replacing structure prediction layers with ARG prediction layers.</i>
+
 To experiment further, three methods of transfer learning were tested through the BugBuster pipeline:
 
 1. Unfrozen ESM weights
