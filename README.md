@@ -12,7 +12,7 @@ Antibiotic resistance classification of bacterial amino acid sequence.
 BugBuster is an end-to-end antibiotic resistance prediction tool for bacterial protein sequences. Deep Learning models have shown immense success in genomic and proteomic applications over the past couple of years, opening the proverbial floodgates to mass usage of these powerful tools across the world of bioinformatics. Biological deep learning models were initially developed and used as single-task tools, whether that be AlphaFold for protein structure prediction, ProteinMPNN for residue prediction, RFdiffusion for de novo protein design, and countless others. These models were, and still are, state-of-the-art performers for each of their specific tasks, with AlphaFold and RFdiffusion sharing [The Nobel Prize in Chemistry 2024](https://www.nobelprize.org/prizes/chemistry/2024/press-release/).
 
 While these developments were happening in the bioinformatics space, machine learning researchers interesting in natural language processing (NLP) were making remarkable discoveries of their own, with a specific example being the development of the BERT architecture ([Devlin et al. 2018](https://arxiv.org/pdf/1810.04805)). BERT stands for Bidirectional Encoder Representations from Transformers, with the key word being "bidirectional". BERT aimed to combat the weakness of other language models of the time — they could only look at tokens up until the current token. This means they could only read and process in one direction. This is problematic, as the context behind a certain word or phrase in a large paragraph could mean very different things depending on what follows. BERT was designed to remove this issue through an innovative pre-training method, as described in their publication:
-> The masked language model randomly masks some of the tokens from the input, and the objective is to predict the original vocabulary id of the masked word based only on its context. Unlike left-to-right language model pre-training, the MLM objective enables the representation to fuse the left and the right context, which allows us to pretrain a deep bidirectional Transformer.
+> "The masked language model randomly masks some of the tokens from the input, and the objective is to predict the original vocabulary id of the masked word based only on its context. Unlike left-to-right language model pre-training, the MLM objective enables the representation to fuse the left and the right context, which allows us to pretrain a deep bidirectional Transformer."
 
 The results of the paper speak for themselves, with a particularly interesting part being the model's high performance in transfer learning and fine-tuning tasks. These results ended up inspiring the creation of Meta Research's Evolutionary Scale Modeling (ESM) protein language model ([Lin et al. 2022](https://www.biorxiv.org/content/10.1101/2022.07.20.500902v1.full.pdf)). This model employed BERT's strategy of MLM pre-training on amino acid sequences, and was proposed as a tool that not only achieved SOTA performance in protein folding tasks, but could also be used in a variety of transfer learning applications. This transfer learning success is a key part of ESM's usefulness, further proved by BugBuster, which uses ESM as a fine-tuning base to classify bacterial amino acid sequences as conferring antibiotic resistance or susceptibility.
 
@@ -24,8 +24,8 @@ One of the main things holding back deep learning in genomics and proteomics is 
 BugBuster takes inspiration from the ESM-2 publication, where they use a protein language model trained with an MLM objective as a fine-tuning base combined with a structure prediction trunk to achieve SOTA results (Figure 1, top). BugBuster mimics this by using the same pretrained ESM model but with the addition of antibiotic resistance protein prediction layers (Figure 1, bottom). The modularity of this approach is utilized in BugBuster's design, as it would not require many code adjustments to train BugBuster on an entirely different task, including regression tasks.
 
 <div style="display: flex; flex-direction: column; align-items: center; margin: 20px 0;">
-    <img src="./Figures/ESM schematic.jpg" alt="ESM schematic" style="height: 300px; margin-bottom: 10px;">
-    <img src="./Figures/BugBuster schematic.jpg" alt="BugBuster Schematic" style="height: 300px; margin-bottom: 10px;">
+    <img src="./Figures/ESM Schematic.jpg" alt="ESM schematic" style="height: 300px;">
+    <img src="./Figures/BugBuster Schematic.jpg" alt="BugBuster Schematic" style="height: 300px; margin-bottom: 10px;">
     <i style="text-align: center; width: 100%; max-width: 600px; margin: 0 auto;">Figure 1 - <b>Top: </b>Example schematic from ESM publication showing the use of the model for a structure prediction task. <b>Bottom: </b>ESM schematic adapted to show how BugBuster adapts a similar approach, replacing structure prediction layers with ARG prediction layers.</i>
 </div>
 To experiment further, three methods of transfer learning were tested through the BugBuster pipeline:
@@ -38,7 +38,7 @@ To experiment further, three methods of transfer learning were tested through th
 Overall, the BugBuster model performs very impressively with all three weight freezing methods. The best performing model was trained with unfrozen ESM weights and reaches an overall accuracy of 95% across both classes, which surpasses the best published accuracy values by 7% (Figure 2). The best performing model previously published is trained from scratch on the ARSS-90 dataset.
 
 <div style="display: flex; justify-content: center; align-items: center;">
-    <img src="./Figures/Performance comparison.jpg" alt="Performance Comparison" style="height: 300px; margin-top: 10px">
+    <img src="./Figures/Performance Comparison.jpg" alt="Performance Comparison" style="margin-top: 10px">
 </div>
 <i style="text-align: center; display: block; width: 100%; max-width: 600px; margin: 0 auto;">
     Figure 1 - <b>A: </b>Performance of fully trained BugBuster with unfrozen ESM weights throughout training. 
@@ -49,8 +49,8 @@ Overall, the BugBuster model performs very impressively with all three weight fr
 Also implemented through BugBuster are two attention visualization techniques: attention weight maps, motif plots. Examples of these two types of figures can be seen in Figure 3. These plots are especially useful as they offer very simple ways to visualize the decision making of the model. These methods, however, are not perfect and their usefulness can depend on model architecture and training objective.
 
 <div style="display: flex; flex-direction: column; align-items: center; margin: 20px 0;">
-    <img src="./Figures/Example Attention Matrices.jpg" alt="Attention Matrices" style="height: 175px; margin-bottom: 10px;">
-    <img src="./Figures/Example Motif Plots.jpg" alt="Motif Plots" style="height: 300px; margin-bottom: 10px;">
+    <img src="./Figures/Example Attention Maps.jpg" alt="Attention Matrices" style="height: 150px;">
+    <img src="./Figures/Example Motif Plots.jpg" alt="Motif Plots" style="height: 200px; margin-bottom: 10px;">
     <i style="text-align: center; width: 100%; max-width: 600px; margin: 0 auto;">Figure 3 - <b>Top: </b>Example attention matrix plots generated from bacterial ribonuclease sequence, correctly predicted as not antibiotic resistant. <b>Bottom: </b>Example motif plots generated from two multidrug resistant proteins, correctly identified by BugBuster.</i>
 </div>
 
